@@ -11,7 +11,7 @@ namespace DynamicObjects
         private readonly DynamicObject dynamicObject = new DynamicObject();
 
         [SerializeField]
-        private MonoDynamicAdapter[] adapters = Array.Empty<MonoDynamicAdapter>();
+        private MonoAdapter[] adapters = Array.Empty<MonoAdapter>();
 
         private void Awake()
         {
@@ -224,7 +224,7 @@ namespace DynamicObjects
             }
         }
 
-        private void SetupAdapter(MonoDynamicAdapter adapter)
+        private void SetupAdapter(MonoAdapter adapter)
         {
             if (!adapter.gameObject.activeSelf)
             {

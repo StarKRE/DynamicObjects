@@ -5,11 +5,19 @@ namespace DynamicObjects
 {
     internal sealed class PropertyBus
     {
-        private readonly Dictionary<string, Delegates> delegateTable;
+        private Dictionary<string, Delegates> _delegateTable;
 
-        internal PropertyBus()
+        private Dictionary<string, Delegates> delegateTable
         {
-            this.delegateTable = new Dictionary<string, Delegates>();
+            get
+            {
+                if (this._delegateTable == null)
+                {
+                    _delegateTable = new Dictionary<string, Delegates>();
+                }
+
+                return _delegateTable;
+            }
         }
 
         internal bool PropertyExists<T>(string name)
@@ -21,7 +29,7 @@ namespace DynamicObjects
 
             return delegates.Exists<T>();
         }
-        
+
         internal T GetProperty<T>(string name)
         {
             if (!this.delegateTable.TryGetValue(name, out var delegates))
@@ -112,7 +120,7 @@ namespace DynamicObjects
             var typeName = typeof(T).Name;
             throw new Exception($"Property {name} of type {typeName} is not found!");
         }
-        
+
         /// Delegate Dictionary
         private sealed class Delegates
         {

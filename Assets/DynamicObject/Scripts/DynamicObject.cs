@@ -8,13 +8,13 @@ namespace DynamicObjects
 
         private readonly MethodBus methods;
 
-        private readonly EventBus eventBus;
+        private readonly EventBus events;
 
         public DynamicObject()
         {
             this.properties = new PropertyBus();
             this.methods = new MethodBus();
-            this.eventBus = new EventBus();
+            this.events = new EventBus();
         }
 
         public IObject Root
@@ -137,21 +137,22 @@ namespace DynamicObjects
         //Events:
         public void AddListener(string name, Action callback)
         {
-            throw new NotImplementedException();
+            this.events.AddListener(name, callback);
         }
 
         public void AddListener<T>(string name, Action<T> callback)
         {
-            throw new NotImplementedException();
+            this.events.AddListener(name, callback);
         }
 
         public void RemoveListener(string name, Action callback)
         {
-            throw new NotImplementedException();
+            this.events.RemoveListener(name, callback);
         }
 
         public void RemoveListener<T>(string name, Action<T> callback)
         {
+            this.
             throw new NotImplementedException();
         }
     }

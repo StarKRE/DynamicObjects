@@ -5,9 +5,9 @@ namespace DynamicObjects
 {
     public sealed class AdapterExeption : Exception
     {
-        public MonoDynamicAdapter Adapter { get; }
+        public MonoAdapter Adapter { get; }
 
-        public AdapterExeption(MonoDynamicAdapter adapter)
+        public AdapterExeption(MonoAdapter adapter)
         {
             this.Adapter = adapter;
         }

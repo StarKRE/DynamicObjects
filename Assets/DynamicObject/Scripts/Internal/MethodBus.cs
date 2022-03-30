@@ -5,20 +5,64 @@ namespace DynamicObjects
 {
     internal sealed class MethodBus
     {
-        private readonly Dictionary<string, Action> methodMap1;
+        private Dictionary<string, Action> _methodMap1;
 
-        private readonly Dictionary<Key1, object> methodMap2;
+        private Dictionary<Key1, object> _methodMap2;
 
-        private readonly Dictionary<Key1, object> methodMap3;
+        private Dictionary<Key1, object> _methodMap3;
 
-        private readonly Dictionary<Key2, object> methodMap4;
+        private Dictionary<Key2, object> _methodMap4;
 
-        internal MethodBus()
+        private Dictionary<string, Action> methodMap1
         {
-            this.methodMap1 = new Dictionary<string, Action>();
-            this.methodMap2 = new Dictionary<Key1, object>();
-            this.methodMap3 = new Dictionary<Key1, object>();
-            this.methodMap4 = new Dictionary<Key2, object>();
+            get
+            {
+                if (this._methodMap1 == null)
+                {
+                    this._methodMap1 = new Dictionary<string, Action>();
+                }
+
+                return this._methodMap1;
+            }
+        }
+
+        private Dictionary<Key1, object> methodMap2
+        {
+            get
+            {
+                if (this._methodMap2 == null)
+                {
+                    this._methodMap2 = new Dictionary<Key1, object>();
+                }
+
+                return this._methodMap2;
+            }
+        }
+
+        private Dictionary<Key1, object> methodMap3
+        {
+            get
+            {
+                if (this._methodMap3 == null)
+                {
+                    this._methodMap3 = new Dictionary<Key1, object>();
+                }
+
+                return this._methodMap3;
+            }
+        }
+
+        private Dictionary<Key2, object> methodMap4
+        {
+            get
+            {
+                if (this._methodMap4 == null)
+                {
+                    this._methodMap4 = new Dictionary<Key2, object>();
+                }
+
+                return this._methodMap4;
+            }
         }
 
         internal void CallMethod(string name)
@@ -135,7 +179,7 @@ namespace DynamicObjects
             var key = new Key2(name, typeof(T), typeof(R));
             return this.methodMap4.ContainsKey(key);
         }
-        
+
         internal void AddMethod1(string name, Action provider)
         {
             if (this.methodMap1.ContainsKey(name))
@@ -201,7 +245,7 @@ namespace DynamicObjects
             var key = new Key2(name, typeof(T), typeof(R));
             this.methodMap4.Remove(key);
         }
-        
+
         ///Hash Keys
         private readonly struct Key1
         {
