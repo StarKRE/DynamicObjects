@@ -60,8 +60,9 @@ namespace DynamicObjects.UnityEditor
                 this.UpdateObjectInEditor();
             }
 
+            EditorGUILayout.Space(2);
             EditorGUILayout.PropertyField(this.initializeOnAwake);
-            EditorGUILayout.Space(4);
+            EditorGUILayout.Space(2);
             EditorGUILayout.PropertyField(this.components, includeChildren: true);
             EditorGUILayout.Space(8);
             GUI.enabled = false;
