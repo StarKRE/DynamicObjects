@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DynamicObjects.Unity;
 using UnityEditor.Callbacks;
 
 namespace DynamicObjects.UnityEditor
@@ -10,7 +11,7 @@ namespace DynamicObjects.UnityEditor
     {
         private static readonly HashSet<string> libraryClassNames = new HashSet<string>
         {
-            nameof(MonoObject)
+            nameof(MonoDynamicObject)
         };
 
         [DidReloadScripts]
@@ -57,5 +58,4 @@ namespace DynamicObjects.UnityEditor
         }
     }
 }
-
 #endif

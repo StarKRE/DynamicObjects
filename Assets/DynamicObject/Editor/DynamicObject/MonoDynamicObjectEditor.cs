@@ -1,15 +1,18 @@
 #if UNITY_EDITOR
+using DynamicObjects.Unity;
 using UnityEditor;
 using UnityEngine;
 
 namespace DynamicObjects.UnityEditor
 {
-    [CustomEditor(typeof(MonoObject))]
+    [CustomEditor(typeof(MonoDynamicObject))]
     public sealed class MonoDynamicObjectEditor : Editor
     {
-        private MonoObject @object;
+        private MonoDynamicObject dynamicObject;
 
-        private SerializedProperty adapters;
+        private SerializedProperty components;
+
+        private SerializedProperty initializeOnAwake;
 
         private bool showProperties = true;
 
@@ -23,8 +26,10 @@ namespace DynamicObjects.UnityEditor
 
         private void OnEnable()
         {
-            this.@object = (MonoObject) this.target;
-            this.adapters = this.serializedObject.FindProperty(nameof(this.adapters));
+            this.dynamicObject = (MonoDynamicObject) this.target;
+            this.components = this.serializedObject.FindProperty(nameof(this.components));
+            this.initializeOnAwake = this.serializedObject.FindProperty(nameof(this.initializeOnAwake));
+            
             ColorUtility.TryParseHtmlString("#FF6235", out this.color);
             this.editMode = !EditorApplication.isPlayingOrWillChangePlaymode;
             EditorApplication.playModeStateChanged += this.OnPlayModeChanged;
@@ -55,7 +60,9 @@ namespace DynamicObjects.UnityEditor
                 this.UpdateObjectInEditor();
             }
 
-            EditorGUILayout.PropertyField(this.adapters, includeChildren: true);
+            EditorGUILayout.PropertyField(this.initializeOnAwake);
+            EditorGUILayout.Space(4);
+            EditorGUILayout.PropertyField(this.components, includeChildren: true);
             EditorGUILayout.Space(8);
             GUI.enabled = false;
             this.DrawProperties();
@@ -70,11 +77,11 @@ namespace DynamicObjects.UnityEditor
         {
             try
             {
-                this.@object.UpdateObjectInEditor();
+                this.dynamicObject.UpdateInEditor();
             }
-            catch (AdapterExeption exeption)
+            catch (ComponentExeption exeption)
             {
-                EditorGUILayout.HelpBox($"Fix Adapter: {exeption.Adapter.name}", MessageType.Error);
+                EditorGUILayout.HelpBox($"Fix Component: {exeption.DynamicComponent.name}", MessageType.Error);
             }
         }
 
@@ -83,7 +90,7 @@ namespace DynamicObjects.UnityEditor
             this.showProperties = EditorGUILayout.Foldout(this.showProperties, "Properties", EditorStyles.foldout);
             if (this.showProperties)
             {
-                var properties = this.@object.GetPropertyDefinitions();
+                var properties = this.dynamicObject.Info.GetPropertyDefinitions();
                 foreach (var definition in properties)
                 {
                     EditorGUILayout.TextField(definition.ToString(), EditorStyles.textField);
@@ -96,7 +103,7 @@ namespace DynamicObjects.UnityEditor
             this.showMethods = EditorGUILayout.Foldout(this.showMethods, "Methods", EditorStyles.foldout);
             if (this.showMethods)
             {
-                var methods = this.@object.GetMethodDefinitions();
+                var methods = this.dynamicObject.Info.GetMethodDefinitions();
                 foreach (var definition in methods)
                 {
                     EditorGUILayout.TextField(definition.ToString(), EditorStyles.textField);
@@ -109,7 +116,7 @@ namespace DynamicObjects.UnityEditor
             this.showEvents = EditorGUILayout.Foldout(this.showEvents, "Events", EditorStyles.foldout);
             if (this.showEvents)
             {
-                var events = this.@object.GetEventDefinitions();
+                var events = this.dynamicObject.Info.GetEventDefinitions();
                 foreach (var definition in events)
                 {
                     EditorGUILayout.TextField(definition.ToString(), EditorStyles.textField);

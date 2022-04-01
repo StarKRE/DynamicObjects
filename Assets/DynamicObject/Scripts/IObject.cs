@@ -42,23 +42,3 @@ namespace DynamicObjects
         void RemoveListener<T>(string name, Action<T> callback);
     }
 }
-
-// void DefineProperty<T>(string name, Func<T> provider);
-//
-// void RemoveProperty<T>(string name);
-//
-// void DefineMethod(string name, Action provider);
-//
-// void DefineMethod<T>(string name, Action<T> provider);
-//
-// void DefineMethod<R>(string name, Func<R> provider);
-//
-// void DefineMethod<T, R>(string name, Func<T, R> provider);
-//
-// void DefineEvent(string name);
-//
-// void DefineEvent<T>(string name);
-//
-// void InvokeEvent(string name);
-//
-// void InvokeEvent<T>(string name, T data);

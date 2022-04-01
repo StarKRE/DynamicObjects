@@ -104,37 +104,37 @@ namespace DynamicObjects
             this.methods.AddMethod2(name, provider);
         }
 
-        internal void AddMethod3<R>(string name, Func<R> provider)
+        public void AddMethod3<R>(string name, Func<R> provider)
         {
             this.methods.AddMethod3(name, provider);
         }
 
-        internal void AddMethod4<T, R>(string name, Func<T, R> provider)
+        public void AddMethod4<T, R>(string name, Func<T, R> provider)
         {
             this.methods.AddMethod4(name, provider);
         }
 
-        internal void RemoveMethod1(string name)
+        public void RemoveMethod1(string name)
         {
             this.methods.RemoveMethod1(name);
         }
 
-        internal void RemoveMethod2<T>(string name)
+        public void RemoveMethod2<T>(string name)
         {
             this.methods.RemoveMethod2<T>(name);
         }
 
-        internal void RemoveMethod3<T>(string name)
+        public void RemoveMethod3<R>(string name)
         {
-            this.methods.RemoveMethod3<T>(name);
+            this.methods.RemoveMethod3<R>(name);
         }
 
-        internal void RemoveMethod4<T, R>(string name)
+        public void RemoveMethod4<T, R>(string name)
         {
             this.methods.RemoveMethod4<T, R>(name);
         }
 
-        //Events:
+        ///Events:
         public void AddListener(string name, Action callback)
         {
             this.events.AddListener(name, callback);
@@ -152,8 +152,37 @@ namespace DynamicObjects
 
         public void RemoveListener<T>(string name, Action<T> callback)
         {
-            this.
-            throw new NotImplementedException();
+            this.events.RemoveListener<T>(name, callback);
+        }
+        
+        public void DefineEvent(string name)
+        {
+            this.events.DefineEvent(name);
+        }
+
+        public void DefineEvent<T>(string name)
+        {
+            this.events.DefineEvent<T>(name);
+        }
+
+        public void DisposeEvent(string name)
+        {
+            this.events.DisposeEvent(name);
+        }
+
+        public void DisposeEvent<T>(string name)
+        {
+            this.events.DisposeEvent<T>(name);
+        }
+        
+        public void InvokeEvent(string name)
+        {
+            this.events.InvokeEvent(name);
+        }
+
+        public void InvokeEvent<T>(string name, T data)
+        {
+            this.events.InvokeEvent(name, data);
         }
     }
 }
