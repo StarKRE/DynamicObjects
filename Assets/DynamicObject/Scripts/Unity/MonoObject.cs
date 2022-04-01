@@ -17,11 +17,6 @@ namespace DynamicObjects.Unity
             return this.TargetObject.GetProperty<T>(name);
         }
 
-        public Func<T> GetPropertyPtr<T>(string name)
-        {
-            return this.TargetObject.GetPropertyPtr<T>(name);
-        }
-
         public bool TryGetProperty<T>(string name, out T property)
         {
             return this.TargetObject.TryGetProperty(name, out property);

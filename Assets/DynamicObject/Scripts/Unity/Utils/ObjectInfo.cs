@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using DynamicObjects;
 
-namespace DynamicObject.Unity
+namespace DynamicObjects.Unity
 {
     public sealed class ObjectInfo
     {

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DynamicObjects.Unity
 {
-    [AddComponentMenu("DynamicObjects/Proxy")]
+    [AddComponentMenu("DynamicObjects/Dynamic Proxy")]
     public sealed class MonoObjectProxy : MonoObject
     {
         [SerializeField]

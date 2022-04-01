@@ -9,8 +9,6 @@ namespace DynamicObjects
         ///Properties 
         T GetProperty<T>(string name);
 
-        Func<T> GetPropertyPtr<T>(string name);
-
         bool TryGetProperty<T>(string name, out T property);
 
         bool TryGetPropertyPtr<T>(string name, out Func<T> provider);

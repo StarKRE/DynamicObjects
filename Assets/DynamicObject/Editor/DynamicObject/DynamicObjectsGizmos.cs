@@ -7,11 +7,12 @@ using UnityEditor.Callbacks;
 
 namespace DynamicObjects.UnityEditor
 {
-    public class MonoDynamicObjectGizmos
+    public class DynamicObjectsGizmos
     {
         private static readonly HashSet<string> libraryClassNames = new HashSet<string>
         {
-            nameof(MonoDynamicObject)
+            nameof(MonoDynamicObject),
+            nameof(MonoObjectProxy)
         };
 
         [DidReloadScripts]
