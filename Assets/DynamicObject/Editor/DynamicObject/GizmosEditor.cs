@@ -7,7 +7,7 @@ using UnityEditor.Callbacks;
 
 namespace DynamicObjects.UnityEditor
 {
-    public class DynamicObjectsGizmos
+    internal sealed class GizmosEditor
     {
         private static readonly HashSet<string> libraryClassNames = new HashSet<string>
         {

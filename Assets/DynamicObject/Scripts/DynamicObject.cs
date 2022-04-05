@@ -4,22 +4,54 @@ namespace DynamicObjects
 {
     public sealed class DynamicObject : IObject
     {
-        private readonly PropertyBus properties;
-
-        private readonly MethodBus methods;
-
-        private readonly EventBus events;
-
-        public DynamicObject()
-        {
-            this.properties = new PropertyBus();
-            this.methods = new MethodBus();
-            this.events = new EventBus();
-        }
-
         public IObject Root
         {
             get { return this; }
+        }
+
+        private PropertyBus _properties;
+
+        private MethodBus _methods;
+
+        private EventBus _events;
+        
+        private PropertyBus properties
+        {
+            get
+            {
+                if (this._properties == null)
+                {
+                    this._properties = new PropertyBus();
+                }
+
+                return this._properties;
+            }
+        }
+
+        private MethodBus methods
+        {
+            get
+            {
+                if (this._methods == null)
+                {
+                    this._methods = new MethodBus();
+                }
+
+                return this._methods;
+            }
+        }
+
+        private EventBus events
+        {
+            get
+            {
+                if (this._events == null)
+                {
+                    this._events = new EventBus();
+                }
+
+                return this._events;
+            }
         }
 
         ///Properties 
@@ -154,7 +186,7 @@ namespace DynamicObjects
         {
             this.events.RemoveListener<T>(name, callback);
         }
-        
+
         public void DefineEvent(string name)
         {
             this.events.DefineEvent(name);
@@ -174,7 +206,7 @@ namespace DynamicObjects
         {
             this.events.DisposeEvent<T>(name);
         }
-        
+
         public void InvokeEvent(string name)
         {
             this.events.InvokeEvent(name);

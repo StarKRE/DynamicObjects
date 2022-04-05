@@ -2,12 +2,12 @@ using DynamicObjects;
 using DynamicObjects.Unity;
 using UnityEngine;
 
-public sealed class TransformComponent : MonoDynamicComponent
+public sealed class TransformComponent : MonoBehaviour, MonoDynamicObject.IComponent
 {
     [SerializeField]
     private Transform root;
-    
-    public override void Initialize(MonoDynamicObject target)
+
+    public void Initialize(MonoDynamicObject target)
     {
         target.AddProperty<Vector3>(CommonKey.Position, this.GetPosiition);
         target.AddProperty<Vector3>(CommonKey.Rotation, this.GetRotation);

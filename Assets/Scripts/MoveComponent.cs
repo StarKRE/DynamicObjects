@@ -2,12 +2,12 @@ using DynamicObjects;
 using DynamicObjects.Unity;
 using UnityEngine;
 
-public sealed class MoveComponent : MonoDynamicComponent
+public sealed class MoveComponent : MonoBehaviour, MonoDynamicObject.IComponent
 {
     [SerializeField]
     private Transform root;
     
-    public override void Initialize(MonoDynamicObject target)
+    public void Initialize(MonoDynamicObject target)
     {
         target.AddMethod2<Vector3>(CommonKey.Move, this.Move);
     }

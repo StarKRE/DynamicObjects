@@ -80,9 +80,9 @@ namespace DynamicObjects.UnityEditor
             {
                 this.dynamicObject.UpdateInEditor();
             }
-            catch (ComponentExeption exeption)
+            catch (MonoDynamicObject.ComponentException exeption)
             {
-                EditorGUILayout.HelpBox($"Fix Component: {exeption.DynamicComponent.name}", MessageType.Error);
+                EditorGUILayout.HelpBox($"Fix Component: {exeption.Component.GetType().Name}", MessageType.Error);
             }
         }
 

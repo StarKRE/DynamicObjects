@@ -6,5 +6,6 @@ namespace DynamicObjects
         public const string Rotation = "Rotation";
         public const string Move = "Move";
         public const string Attack = "Attack";
+        public const string Die = "Die";
     }
 }

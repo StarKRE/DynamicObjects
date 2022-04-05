@@ -1,4 +1,5 @@
 using System;
+using DynamicObjects;
 using DynamicObjects.Unity;
 using UnityEngine;
 using static DynamicObjects.CommonKey;
@@ -21,15 +22,16 @@ namespace DefaultNamespace
             Debug.Log($"Player rotation {rotation}");
 
             this.player.TryGetMethodPtr(Move, out this.movePtr);
-            
+
             this.player.AddListener(Attack, this.OnAttack);
+            this.player.AddListener(Die, this.OnDied);
         }
 
         private void OnDestroy()
         {
             this.player.RemoveListener(Attack, this.OnAttack);
         }
-        
+
         private void Update()
         {
             if (Input.GetKey(KeyCode.UpArrow))
@@ -41,7 +43,7 @@ namespace DefaultNamespace
             {
                 this.movePtr.Invoke(new Vector3(0, 0, -1));
             }
-            
+
             if (Input.GetKey(KeyCode.LeftArrow))
             {
                 this.movePtr.Invoke(new Vector3(-1, 0, 0));
@@ -56,11 +58,21 @@ namespace DefaultNamespace
             {
                 this.player.CallMethod(Attack);
             }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                this.player.CallMethod(Die);
+            }
         }
-        
+
         private void OnAttack()
         {
             Debug.Log("ATTACK CALLBACK");
+        }
+        
+        private void OnDied()
+        {
+            Debug.Log("DIE CALLBACK");
         }
     }
 }

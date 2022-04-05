@@ -1,11 +1,12 @@
 using DynamicObjects;
 using DynamicObjects.Unity;
+using UnityEngine;
 
-public sealed class AttackComponent : MonoDynamicComponent
+public sealed class AttackComponent : MonoBehaviour, MonoDynamicObject.IComponent
 {
     private MonoDynamicObject target;
 
-    public override void Initialize(MonoDynamicObject target)
+    public void Initialize(MonoDynamicObject target)
     {
         target.AddMethod1(CommonKey.Attack, this.Attack);
         target.DefineEvent(CommonKey.Attack);
